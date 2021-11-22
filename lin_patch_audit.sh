@@ -32,7 +32,7 @@ else
 	show_usage
 fi
 
-if [ -n "$4" ];then
+if [[ -n "$4" ]];then
 	outfile="$4"
 fi
 
@@ -40,10 +40,12 @@ touch $outfile
 
 while read host; do
 
-	if [[ -n "$outfile"]];then
+	if [ -n "$outfile"];then
 		sshpass -p $password ssh -o StrictHostKeyChecking=no $username@$host "$ssh_cmd">>$outfile
 	else
 		sshpass -p $password ssh -o StrictHostKeyChecking=no $username@$host "$ssh_cmd"
+	fi
+
 done < $infile
 
 #EOF
